@@ -1,0 +1,95 @@
+{% extends 'base2.html' %}
+
+
+{% block titulo %}
+    Lista de Videojuegos
+{% endblock titulo %}
+
+
+{% block contenido %}
+<h1 class="app-page-title">Lista de Videojuegos</h1>
+<div class="app-card app-card-orders-lable shadow-sm mb-s">
+  
+  
+ 
+  <table class="table  table-borderless">
+      <thead class="table-info">
+          <th>Título</th>
+          <th>Año</th>
+          <th>Categoría</th>
+          <th>Descripción</th>
+          <th>Acciones</th>
+      </thead>
+      <tbody>
+          {% for videojuego in videojuegos %}
+          <tr>
+                <td>{{videojuego.titulo}}</td>
+                <td>{{videojuego.anio}}</td>
+                <td>{{videojuego.categoria}}</td>
+                <td>{{videojuego.descripcion}}</td>
+                <td>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-primary" href="{% url 'videojuego:vercl' videojuego.pk%}">Ver</button>
+                        <button type="button" class="btn btn-secondary" href="{% url 'videojuego:editarcl' videojuego.pk %}">Editar</button>
+                        <button type="button"  href="#">Eliminar</button>
+                    </div>
+                </td>
+          </tr>
+          <div class="modal fade" id="modalEliminar" tabindex="-1" aria-labelledby="modalEliminarLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="modalEliminarLabel">Eliminar Videojuego</h5>
+                  <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="modalCuerpo">
+                  ¿Estás seguro/a de que quieres eliminar el videojuego?
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                  
+                  <form id="formEliminar" method="post">
+                      {% csrf_token %}
+                      <button class="btn btn-danger" href="{% url 'videojuego:eliminarcl' videojuego.id %}">Eliminar</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+      </tbody>
+  </table>
+</div>
+
+<div class="pagination justify-content-center">
+    
+  <ul class="pagination">
+
+      <li class="page-item ">
+          <a href="?page=1" class="page-link">&laquo; Primero</a>
+      </li>
+
+      {% for i in page_obj.paginator.page_range %}
+
+          {% if page_obj.number == i  %}
+              <li class="page-item active">
+                  <a class="page-link" href="#">{{ i }} <span class="sr-only">(current)</span></a>
+              </li>
+
+          {% else %}
+              <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+          {% endif %}
+
+      {% endfor %}
+
+      <li class="page-item ">
+          <a href="?page={{ page_obj.paginator.num_pages }}" class="page-link">Ultimo &raquo;</a>
+      </li>
+
+  </ul>
+</div>
+
+  
+{% endblock contenido %}
+
+  <!-- Button trigger modal -->

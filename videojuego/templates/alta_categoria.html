@@ -1,0 +1,15 @@
+{% extends 'base2.html' %}
+
+{% block titulo %}
+    Nueva Categoría
+{% endblock titulo %}
+
+{% block contenido %}
+    <h1 class="app-page-title">Agregar Categoría</h1>
+    
+    <form method="post">
+        {% csrf_token %}
+        {{form.as_p}}
+        <button type="submit" class="btn btn-info">Agregar</button>
+    </form>
+{% endblock contenido %}

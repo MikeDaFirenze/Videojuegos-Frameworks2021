@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block titulo %}
+    Lista de Usuarios
+{% endblock titulo %}
+
+
+{% block contenido %}
+<h1 class="app-page-title">Lista de Usuarios</h1>
+<div class="app-card app-card-orders-lable shadow-sm mb-s">
+  <table class="table  table-borderless">
+      <thead class="table-info">
+          <th>Nombre</th>
+          <th>Usuario</th>
+          <th>Avatar</th>
+      </thead>
+      <tbody>
+          {% for usuario in usuarios %}
+          <tr>
+                <td>{{usuario.first_name}}</td>
+                <td>{{usuario.username}}</td>
+                <td>
+                    {% if usuario.foto %}
+                        <img src="{{MEDIA_URL}}{{usuario.foto}}" class="img" alt="" width="40px">
+                    {% else %}
+                        <img src="{% static 'images/user.png' %}" class="img_f" alt="" width="40px">
+                    {% endif %}
+                </td>
+          </tr>
+          {% endfor %}
+      </tbody>
+  </table>
+</div>
+
+  
+{% endblock contenido %}

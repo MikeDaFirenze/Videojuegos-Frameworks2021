@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block titulo %}
+    Detalles de usuario
+{% endblock titulo %}
+    
+
+{% block contenido %}
+<h1 class="app-page-title">Detalles de usuario</h1>
+<div class="app-card app-card-orders-lable shadow-sm mb-s">
+    <table class="table table-borderless">
+        <thead class="table-info"> 
+            <th>Nombre</th>
+            <th>Usuario</th>
+            <th>Estado</th>
+            <th>Municipio</th>
+            <th>Foto</th>
+        </thead>
+        <tbody>
+            {% for object in object_list %}
+            <tr>
+                <td>{{object.first_name}}</td>
+                <td>{{object.username}}</td>
+                <td>{{object.estado}}</td>                
+                <td>{{object.municipio}}</td>
+                <td>
+                    {% if object.foto %}
+                        <img src="{{MEDIA_URL}}{{usuario.foto}}" alt="" width="40px">
+                    {% else %}
+                        <img src="{% static 'images/user.png' %}" alt="" width="40px">
+                    {% endif %}
+                </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+ {% endblock contenido %}

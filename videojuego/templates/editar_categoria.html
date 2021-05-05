@@ -1,0 +1,14 @@
+{% extends 'base2.html' %}
+
+{% block titulo %}
+    Editar Categoría
+{% endblock titulo %}
+
+{% block contenido %}
+    <h1 class="app-page-title">Actualizar Categoría</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{form.as_p}}
+        <button type="submit" class="btn btn-info">Guardar</button>
+    </form>
+{% endblock contenido %}

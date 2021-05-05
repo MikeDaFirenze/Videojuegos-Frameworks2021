@@ -1,0 +1,26 @@
+<!--<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nueva categoría</title>
+</head>
+<body>-->
+
+{% extends 'base2.html' %}
+
+{% block titulo %}
+    Nueva Categoría
+{% endblock titulo %}
+
+{% block contenido %}
+
+    <h1>Nueva categoría</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{form.as_p}}
+        <button type="submit">Agregar</button>
+    </form>
+{% endblock contenido %}
+<!--</body>
+</html>-->

@@ -1,0 +1,81 @@
+{% extends 'base2.html' %}
+{% load static %}
+
+{% block titulo %}
+    Lista de Usuarios
+{% endblock titulo %}
+
+
+{% block contenido %}
+<h1 class="app-page-title">Lista de Usuarios</h1>
+<div class="app-card app-card-orders-lable shadow-sm mb-s">
+    <table class="table  table-borderless">
+        <thead class="table-info">
+          <th>Nombre</th>
+          <th>Usuario</th>
+          <th>Avatar</th>
+          <th>Acciones</th>
+          <th>Pdf</th>
+          <th>Permisos</th>
+        </thead>
+        <tbody>
+          {% for usuario in usuarios %}
+          <tr>
+                <td>{{usuario.first_name}}</td>
+                <td>{{usuario.username}}</td>
+                <td>
+                    {% if usuario.foto %}
+                        <img src="{{MEDIA_URL}}{{usuario.foto}}" alt="" width="40px">
+                    {% else %}
+                        <img src="{% static 'images/user.png' %}" alt="" width="40px">
+                    {% endif %}
+                </td>
+                <td>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-primary" href="#">Ver</button>
+                        <button type="button" class="btn btn-secondary"  href="#">Editar</button>
+                        <a type="button" class="btn btn-danger"  href="{% url 'usuarios:eliminar' usuario.id %}">Eliminar</a>
+                    </div>
+                </td>
+                <td><a href="{% url 'usuarios:Updf' usuario.pk %}">
+                    <img src="{% static 'image/pdf.png' %}" width="40px">
+                </a></td>
+                <td><a class="btn btn-dark" href="{% url 'usuarios:permisos' usuario.id %}" role="button">Gestionar Permisos</a></td>
+          </tr>
+          {% endfor %}
+      </tbody>
+  </table>
+</div>
+<div class="pagination justify-content-center">
+    
+  <ul class="pagination">
+
+      <li class="page-item ">
+          <a href="?page=1" class="page-link">&laquo; Primero</a>
+      </li>
+
+      {% for i in page_obj.paginator.page_range %}
+
+          {% if page_obj.number == i  %}
+              <li class="page-item active">
+                  <a class="page-link" href="#">{{ i }} <span class="sr-only">(current)</span></a>
+              </li>
+
+          {% else %}
+              <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+          {% endif %}
+
+      {% endfor %}
+
+      <li class="page-item ">
+          <a href="?page={{ page_obj.paginator.num_pages }}" class="page-link">Ultimo &raquo;</a>
+      </li>
+
+  </ul>
+</div>
+<br>
+<div class="text-center">
+    <a type="button" class="btn btn-primary" href="{% url 'usuarios:pdf' %}">Descargar Lista de usuarios</a>
+</div>
+  
+{% endblock contenido %}

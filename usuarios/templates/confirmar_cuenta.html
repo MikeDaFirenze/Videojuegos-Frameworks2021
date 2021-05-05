@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirmar cuenta</title>
+</head>
+<body>
+    <div>
+        <h3>Validar cuenta</h3>
+        <p>Hola {{usuario.username}}</p>
+        <p>Para confirmar tu registro dentro del sistem de <b>Videojuegos</b>: debes dar click en el siguiente enlace</p>
+        <br>
+        <hr>
+        <a href="http://{{dominio}}{% url 'usuarios:activar' uid64=uid token=token %}"></a>
+        <br>
+        <p>Pero que gusto de tenerte aquí crack, máquina, tifón, bestia setsual, suerte campeón</p>
+    </div>
+</body>
+</html>

@@ -1,0 +1,17 @@
+El usuario con el id: 33, fue eliminado de la lista usuarios. 
+El usuario con el id: 36, fue eliminado de la lista usuarios. 
+El usuario con el id: 37, fue eliminado de la lista usuarios. 
+Un nuevo usuario con el id: 45, ha sido registrado en la lista usuarios. 
+El usuario con el id: 38, fue eliminado de la lista usuarios. 
+El usuario con el id: 46, fue eliminado de la lista usuarios. 
+El usuario con el id: 35, fue eliminado de la lista usuarios. 
+Un nuevo usuario con el id: 47, ha sido registrado en la lista usuarios. 
+El usuario con el id: 39, fue eliminado de la lista usuarios. 
+El usuario con el id: 40, fue eliminado de la lista usuarios. 
+El usuario con el id: 41, fue eliminado de la lista usuarios. 
+El usuario con el id: 42, fue eliminado de la lista usuarios. 
+El usuario con el id: 42, fue eliminado de la lista usuarios. 
+El usuario con el id: 43, fue eliminado de la lista usuarios. 
+El usuario con el id: 45, fue eliminado de la lista usuarios. 
+El usuario con el id: 47, fue eliminado de la lista usuarios. 
+El usuario con el id: 44, fue eliminado de la lista usuarios. 

@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+
+{% block titulo %}
+    Lista de Videojuegos
+{% endblock titulo %}
+    
+
+{% block contenido %}
+    
+
+    
+    <h1>Lista de Videjuegos</h1>
+    <a href="{% url 'videojuego:alta' %}">Nuevo Videojuego</a>
+    <hr>
+    <br>
+    <table class="table table-hover">
+        <thead>
+            <th>ID</th>
+            <th>Nombre Videojuego</th>
+            <th>Acciones</th>
+        </thead>
+        <tbody>
+            {% for videojuego in videojuegos %}
+            <tr>
+                <td>{{videojuego.id}}</td>
+                <td>{{videojuego.titulo}}</td>
+                <td><a href="{% url 'videojuego:eliminar' videojuego.id %}">Eliminar</a></td>
+                <td><a href="{% url 'videojuego:editar' videojuego.id %}">Editar</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock contenido %}
