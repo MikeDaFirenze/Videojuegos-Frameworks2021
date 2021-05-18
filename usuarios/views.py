@@ -93,6 +93,15 @@ class Permisos(PermissionRequiredMixin, ListView):
 class LoginUsuario(LoginView):
     template_name = 'login.html'
     form_class = AuthenticationForm
+
+    def get_success_url(self):
+
+        self.request.session['cuantos'] = 0
+        self.request.session['total'] = 0.0
+        self.request.session['articulos'] = {}
+
+        return super().get_success_url()
+    
     success_url = reverse_lazy('usuarios:lista')
 
 class VistaPdf(ListView):
@@ -131,7 +140,6 @@ class SignupUsuario(CreateView):
     form_class = UsuarioForm
     def agregado(self):
         ultimo = Usuario.objects.last()
-        print(str(ultimo.id))
         request_signal_add.send(sender=Usuario, id=ultimo.id)
     success_url = reverse_lazy('usuarios:login')
 
@@ -152,16 +160,13 @@ def obtiene_municipios(request):
 def post_request_receive(sender, **kwargs):
     with open("logsRequests.txt", "a+") as f:
         f.write("Un usuario ingresó a la página de lista usuarios. \n")
-        print("Se ejecutó")
 
 @receiver(request_signal_del)
 def post_delete_user_request(sender, **kwargs):
     with open("logsRequestsChidos.txt", "a+") as f:
         f.write(f"El usuario con el id: {kwargs['id']}, fue eliminado de la lista usuarios. \n")
-        print("Se ejecutó")
 
 @receiver(request_signal_add)
 def post_add_user_request(sender, **kwargs):
     with open("logsRequestsChidos.txt", "a+") as f:
         f.write(f"Un nuevo usuario con el id: {kwargs['id']}, ha sido registrado en la lista usuarios. \n")
-        print("Se ejecutó")

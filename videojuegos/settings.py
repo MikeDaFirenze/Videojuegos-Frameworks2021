@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'videojuego',
-    'usuarios'
+    'usuarios',
+    'articulos'
 ]
 
 MIDDLEWARE = [
@@ -136,5 +137,10 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = '37180284@uaz.edu.mx'
-EMAIL_HOST_PASSWORD = 'temporal2018'
+EMAIL_HOST_PASSWORD = 'pruebitamala'
 EMAIL_PORT = 587
+
+
+
+SESSION_COOKIE_AGE = 600
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True

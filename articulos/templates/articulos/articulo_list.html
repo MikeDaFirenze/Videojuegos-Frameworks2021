@@ -1,0 +1,156 @@
+<style>
+    #presio{
+        color: red;
+    }
+    #titulo{
+        color: black;
+        font-weight: bold;
+    }
+</style>
+
+
+{% extends 'base2.html' %}
+
+{% block titulo %}Lista de artículos{% endblock titulo %}
+
+{% block contenido %}
+<div class="contenedor">
+    <h1>Lista de artículos</h1>
+</div>
+
+<div class="album py-5 bg-ligth">
+    <div class="container">
+        <div class="row">
+
+        {% for articulo in object_list %}
+            <div class="col-md-4">
+
+                <div class="card" style="width: 18rem;">
+                    <img class="card-img-top" src="{{  MEDIA_URL }}/{{ articulo.imagen }}" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 id="titulo">{{ articulo.nombre}}</h5>
+                      <p class="card-text">{{ articulo.descripcion }}</p>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                      <li class="list-group-item">Stock: {{articulo.stock}}</li>
+                      <li class="list-group-item">Precio: <h5 id="presio">{{ articulo.precio }}</h5> </li>
+                      
+                      <li class="list-group-item"> Cantidad a comprar:
+                            <div class="form-group">
+
+                                <form action="{% url 'articulos:comprar' %}" method="POST">
+                                    <input type="text" name="id" value="{{ articulo.id }}" hidden > 
+                                    {% csrf_token %}
+                                    <select class="form-control" name="cantidad" >
+                                        {% with ''|center:articulo.stock as range %}
+                                        {% for _ in range %}
+                                            <option name="opcion">{{ forloop.counter }}</option>
+                                        {% endfor %}.0
+                                        {% endwith %}
+                                    </select>
+
+                                    <div class="card-body text-center">
+                        
+                                        {% if articulo.stock > 0 %}
+                                            <div class="btn btn-success">
+                                                <i class="fas fa-cart-plus">
+                                                    <input class="btn" type="submit" value="Agregar al carrito">
+                                                </i>
+                                            </div>
+                                        {% else %}
+                                            
+                                            <i class="fas fa-times-circle"></i> Sin existencias
+                                            
+                                        {% endif %}
+                                            
+                                    </div>
+
+                                </form>
+                                
+                            </div>
+                      </li>
+                      
+                      {% if perms.usuarios.permiso_administradoress %}
+                        <li class="list-group-item text-center">
+                            <a class="btn btn-danger" href="javascript:eliminarModal( '{% url 'articulos:eliminar' articulo.id %}' )">
+                                <i class='fas fa-trash-alt'> Eliminar articulo</i>
+                            </a>
+                        </li>
+                      {% endif %}
+                          
+                    </ul>
+                    
+                  </div>
+
+            </div>
+        {% endfor %}
+
+        </div>
+    </div>
+</div>
+
+<!-- Button trigger modal -->
+<button hidden id="btnModal" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+    Launch demo modal
+  </button>
+  
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Elimina artículo</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          ¿Estas seguro de eliminar el artículo? 
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal"><a class="btn btn-secondary" href=""> Cancelar</a></button>
+          <button type="button" class="btn btn-danger"><a class="btn btn-danger" id="confirmaEliminacion" href=""> Eliminar</a></button>
+        </div>
+      </div>
+    </div>
+  </div>
+    
+
+<div class="pagination justify-content-center">
+    
+    <ul class="pagination">
+
+        <li class="page-item ">
+            <a href="?page=1" class="page-link">&laquo; Primero</a>
+        </li>
+
+        {% for i in page_obj.paginator.page_range %}
+
+            {% if page_obj.number == i  %}
+                <li class="page-item active">
+                    <a class="page-link" href="#">{{ i }} <span class="sr-only">(current)</span></a>
+                </li>
+
+            {% else %}
+                <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+            {% endif %}
+
+        {% endfor %}
+
+        <li class="page-item ">
+            <a href="?page={{ page_obj.paginator.num_pages }}" class="page-link">Ultimo &raquo;</a>
+        </li>
+
+    </ul>
+</div>
+
+<script>
+    function eliminarModal(url) {
+        document.querySelector("#confirmaEliminacion").setAttribute('href',url);
+        document.querySelector("#btnModal").click()
+    }
+</script>
+
+
+
+{% endblock contenido %}

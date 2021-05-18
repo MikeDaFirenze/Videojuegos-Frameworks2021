@@ -18,6 +18,24 @@
     <meta name="description" content="Portal - Bootstrap 5 Admin Dashboard Template For Developers">
     <meta name="author" content="Xiaoying Riley at 3rd Wave Media">    
     <link rel="shortcut icon" href="favicon.jpg"> 
+	<link rel="stylesheet" href="{% static 'plugins/fontawesome-free/css/all.min.css' %}">
+  	<!-- Ionicons -->
+  	<link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+  	<!-- Tempusdominus Bbootstrap 4 -->
+  	<link rel="stylesheet" href="{% static 'plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css' %}">
+  	<!-- iCheck -->
+  	<link rel="stylesheet" href="{% static 'plugins/icheck-bootstrap/icheck-bootstrap.min.css' %}">
+  	<!-- JQVMap -->
+  	<link rel="stylesheet" href="{% static 'plugins/jqvmap/jqvmap.min.css' %}">
+  	<!-- Theme style -->
+  	<link rel="stylesheet" href="{% static 'dist/css/adminlte.min.css' %}">
+  	<!-- overlayScrollbars -->
+  	<link rel="stylesheet" href="{% static 'plugins/overlayScrollbars/css/OverlayScrollbars.min.css' %}">
+  	<!-- Daterange picker -->
+  	<link rel="stylesheet" href="{% static 'plugins/daterangepicker/daterangepicker.css' %}">
+  	<!-- summernote -->
+  	<link rel="stylesheet" href="{% static 'plugins/summernote/summernote-bs4.css' %}">
+	<script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
     
     <!-- FontAwesome JS-->
     <script defer src="{% static 'js/all.min.js' %}"></script>
@@ -50,6 +68,9 @@
 		            </div><!--//app-search-box-->
 		            
 		            <div class="app-utilities col-auto">
+						<div class="fas fa-cart-arrow-down">
+							${{request.session.total|floatformat:1}}
+						</div>
 			            <div class="app-utility-item app-notifications-dropdown dropdown">    
 				            <a class="dropdown-toggle no-toggle-arrow" id="notifications-dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false" title="Notifications">
 					            <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
@@ -251,6 +272,33 @@
 						        </ul>
 					        </div>
 					    </li><!--//nav-item-->
+
+						<li class="nav-item has-submenu">
+					        <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
+					        <a class="nav-link submenu-toggle {% if vj_lista  or vj_nuevo or vj_del or vj_det or vj_edit%} active {% endif %}" href="#" data-toggle="collapse" data-target="#submenu-1" aria-expanded="false" aria-controls="submenu-1">
+						        <span class="nav-icon">
+						        <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
+						        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-files" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+	  <path fill-rule="evenodd" d="M4 2h7a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2zm0 1a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h7a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1H4z"/>
+	  <path d="M6 0h7a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2v-1a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H6a1 1 0 0 0-1 1H4a2 2 0 0 1 2-2z"/>
+	</svg>
+						         </span>
+		                         <span class="nav-link-text ">Artículos</span>
+		                         <span class="submenu-arrow">
+		                             <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-chevron-down" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+	  <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
+	</svg>
+	                             </span><!--//submenu-arrow-->
+					        </a><!--//nav-link-->
+					        <div id="submenu-1" class="collapse submenu submenu-1" data-parent="#menu-accordion">
+						        <ul class="submenu-list list-unstyled">
+							        <li class="submenu-item"><a class="submenu-link" href="{% url 'articulos:lista' %}">Lista</a></li>
+							        <li class="submenu-item"><a class="submenu-link" href="{% url 'articulos:vercarrito' %}">Carrito</a></li>
+							        
+						        </ul>
+					        </div>
+					    </li><!--//nav-item-->
+
 					    <li class="nav-item has-submenu">
 					        <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
 					        <a class="nav-link submenu-toggle {% if cat_lista or cat_nueva or cat_edit%} active {% endif %} " href="#" data-toggle="collapse" data-target="#submenu-2" aria-expanded="false" aria-controls="submenu-2">

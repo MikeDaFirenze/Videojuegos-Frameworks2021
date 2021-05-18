@@ -24,12 +24,10 @@ class Municipio(models.Model):
 def save_post(sender, instance, **kwargs):
     with open("logsUsuario.txt", "a+") as f:
         f.write("Se introdujo un nuevo usuario a la base de datos. \n")
-        print("Se ejecutó")
 
 def delete_post(sender, instance, **kwargs):
     with open("logsUsuario.txt", "a+") as f:
         f.write("Se eliminó un usuario de la base de datos. \n")
-        print("Se ejecutó")
 
 post_save.connect(save_post, sender=Usuario)
 post_delete.connect(delete_post, sender=Usuario)
